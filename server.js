@@ -1,7 +1,7 @@
 const express = require('express');
 const bosyParser= require("body-parser");
 const bcrypt = require('bcrypt-nodejs');
-var cors = require('cors');
+const cors = require('cors');
 const knex = require('knex');
 const { response } = require('express');
 

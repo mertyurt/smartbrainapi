@@ -25,7 +25,7 @@ const app = express();
 app.use(bosyParser.json());
 app.use(cors());
 
-app.get('/', (req,res) => res.send(db.users))
+app.get('/', (req,res) => res.send('it is workin'))
 app.get("/profile/:id", (req, res)=>{profile.handleProfileGet(req, res, db)})
 
 app.post("/signin", (req, res)=> {signin.handleSignin(req, res, db, bcrypt)})

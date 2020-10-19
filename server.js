@@ -19,10 +19,17 @@ const db = knex({
   });
 
 const app = express();
-app.set('trust proxy',true);
+
+app.use((req ,res, next)=>{
+  res.setHeader('Access-Control-Allow-Origin','*') // * for all domains
+  res.setHeader('Access-Control-Allow-Methods','OPTIONS, GET, POST, PUT, PATCH, DELETE')
+  next()
+})
 
 app.use(bosyParser.json());
 app.use(cors());
+
+app.set('trust proxy',true);
 
 app.get('/', (req,res) => res.send('it is workin'))
 app.get("/profile/:id", (req, res)=>{profile.handleProfileGet(req, res, db)})

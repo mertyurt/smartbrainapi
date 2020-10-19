@@ -19,6 +19,7 @@ const db = knex({
   });
 
 const app = express();
+app.set('trust proxy',true);
 
 app.use(bosyParser.json());
 app.use(cors());

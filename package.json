@@ -2,9 +2,8 @@
   "name": "smart-brain-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "ng build",
     "start": "node server.js",
     "start:dev": "nodemon server.js"
   },

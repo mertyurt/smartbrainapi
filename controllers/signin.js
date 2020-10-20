@@ -1,9 +1,11 @@
 const handleSignin = (req,res, db, bcrypt)=>{
     const {email, password} = req.body;
+    console.log("------------------------email" + email);
     if (!email || !password ) {
         console.log("duzgun yaz mk")
         return res.status(400).json('incorrect form submission'); 
     }
+    console.log("---------------------->>>>>>>>>handle sign in dolu")
     db.select('email', 'hash').from('login')
     .where('email', '=', email )
     .then(data=>{
@@ -21,7 +23,9 @@ const handleSignin = (req,res, db, bcrypt)=>{
             res.status(400).json('wrong credentials');
         }
     })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+        res.status(401).json('timeout hatası')
+        console.log(err)})
 }
 
 module.exports ={

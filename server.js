@@ -1,5 +1,5 @@
 const express = require('express');
-const bosyParser= require("body-parser");
+const bodyParser= require("body-parser");
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
@@ -19,23 +19,28 @@ const db = knex({
   });
 
 const app = express();
-
-app.use((req ,res, next)=>{
-  res.setHeader('Access-Control-Allow-Origin','*') // * for all domains
-  res.setHeader('Access-Control-Allow-Methods','OPTIONS, GET, POST, PUT, PATCH, DELETE')
-  console.log("---->>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-  return next();
-})
-
-app.use(bosyParser.json());
 app.use(cors());
+
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  console.log("--------------------->>>>>>>>>>>><<")
+  next();});
+
+app.use(bodyParser.json());
+
 
 app.set('trust proxy',true);
 
 app.get('/', (req,res) => res.send('it is workin'))
 app.get("/profile/:id", (req, res)=>{profile.handleProfileGet(req, res, db)})
 
-app.post("/signin", (req, res)=> {signin.handleSignin(req, res, db, bcrypt)})
+app.post("/signin", (req, res)=> { 
+  console.log("-----------------------------signin")
+  signin.handleSignin(req, res, db, bcrypt)})
 app.post("/register", (req, res)=>{ register.handleRegister(req, res, db ,bcrypt)})
 
 app.put("/image", (req, res) =>{image.handleImage(req, res, db)})

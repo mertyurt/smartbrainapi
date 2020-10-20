@@ -16,14 +16,14 @@ const db = knex({
     client: 'pg',
     connection: {
       connectionString : process.env.DATABASE_URL,
-      ssl: true,
+      rejectUnauthorized: false
     }
   });
 
 const app = express();
 app.use(cors());
 
-
+/*
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,GET, OPTIONS, PUT, PATCH, DELETE');
@@ -31,6 +31,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   console.log("--------------------->>>>>>>>>>>><<")
   next();});
+*/
 
 app.use(bodyParser.json());
 
